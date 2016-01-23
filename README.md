@@ -1,6 +1,6 @@
 ## Cache
 
-A easy integration for handling files to [Laravel](http://laravel.com/docs).
+A easy integration for handling caching in a structured way to [Laravel](http://laravel.com/docs).
 
 [![Total downloads](https://img.shields.io/packagist/dt/nodes/cache.svg)](https://packagist.org/packages/nodes/cache)
 [![Monthly downloads](https://img.shields.io/packagist/dm/nodes/cache.svg)](https://packagist.org/packages/nodes/cache)
