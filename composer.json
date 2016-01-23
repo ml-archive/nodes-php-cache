@@ -19,9 +19,6 @@
         "nodes/cache": "^0.1.0"
     },
     "autoload": {
-        "classmap": [
-            "vendor/nodes/cache"
-        ],
         "psr-4": {
             "Nodes\\Cache\\": "src"
         },
