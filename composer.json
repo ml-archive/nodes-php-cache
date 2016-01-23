@@ -1,0 +1,29 @@
+{
+  "name": "nodes/cache",
+  "description": "Package to enforce a structure of how caching is done and where the settings can be foind",
+  "keywords": [
+    "nodes",
+    "cache",
+    "laravel"
+  ],
+  "authors": [
+    {
+      "name": "Casper Rasmussen",
+      "email": "cr@nodes.dk",
+      "role": "CTO"
+    }
+  ],
+  "require": {
+    "laravel/framework": "5.1.*||5.2.*",
+    "nodes/core": "^0.1",
+    "league/flysystem-aws-s3-v3": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nodes\\Cache\\": "src"
+    },
+    "files": [
+      "src/Support/Helpers/Cache.php"
+    ]
+  }
+}
