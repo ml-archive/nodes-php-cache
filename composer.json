@@ -1,28 +1,32 @@
 {
-  "name": "nodes/cache",
-  "description": "Package to enforce a structure of how caching is done and where the settings can be foind",
-  "keywords": [
-    "nodes",
-    "cache",
-    "laravel"
-  ],
-  "authors": [
-    {
-      "name": "Casper Rasmussen",
-      "email": "cr@nodes.dk",
-      "role": "CTO"
-    }
-  ],
-  "require": {
-    "laravel/framework": "5.1.*||5.2.*",
-    "nodes/core": "^0.1"
-  },
-  "autoload": {
-    "psr-4": {
-      "Nodes\\Cache\\": "src"
+    "name": "nodes/cache",
+    "description": "Package to enforce a structure of how caching is done and where the settings can be found",
+    "keywords": [
+        "nodes",
+        "cache",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Casper Rasmussen",
+            "email": "cr@nodes.dk",
+            "role": "CTO"
+        }
+    ],
+    "require": {
+        "laravel/framework": "5.1.*||5.2.*",
+        "nodes/core": "^0.1",
+        "nodes/cache": "^0.1.0"
     },
-    "files": [
-      "src/Support/Helpers/Cache.php"
-    ]
-  }
+    "autoload": {
+        "classmap": [
+            "vendor/nodes/cache"
+        ],
+        "psr-4": {
+            "Nodes\\Cache\\": "src"
+        },
+        "files": [
+            "src/Support/Helpers/Cache.php"
+        ]
+    }
 }
