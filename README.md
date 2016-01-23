@@ -47,6 +47,11 @@ Setup alias in config/app.php
 Nodes\Cache\ServiceProvider::class
 ```
 
+add to composer autoload->classmap
+```
+      "vendor/nodes/cache"
+```
+
 Copy the config files from vendor/nodes/cache/config/cache.php to config/nodes/cache.php
 
 ## Usage
