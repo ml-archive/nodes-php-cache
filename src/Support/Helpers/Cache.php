@@ -46,7 +46,7 @@ if (!function_exists('cache_forget')) {
      */
     function cache_forget($cacheGroup, array $params = [], $tags = ['default'])
     {
-        return \NodesCache::put($cacheGroup, $params, $data, $tags);
+        return \NodesCache::forget($cacheGroup, $params, $tags);
     }
 }
 
