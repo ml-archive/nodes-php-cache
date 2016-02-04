@@ -2,64 +2,68 @@
 if (!function_exists('cache_get')) {
 
     /**
-     * cache_get
+     * Retrieve cache
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param       $cacheGroup
-     * @param array $params
-     * @param array $tags
+     *
+     * @param  string            $cacheGroupKey
+     * @param  array             $params
+     * @param  string|array|null $tags
      * @return mixed|null
      */
-    function cache_get($cacheGroup, array $params = [], $tags = ['default'])
+    function cache_get($cacheGroupKey, array $params = [], $tags = null)
     {
-        return \NodesCache::get($cacheGroup, $params, $tags);
+        return \NodesCache::get($cacheGroupKey, $params, $tags);
     }
 }
 if (!function_exists('cache_put')) {
 
     /**
-     * cache_put
+     * Store cache
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param       $cacheGroup
-     * @param array $params
-     * @param       $data
-     * @param array $tags
+     *
+     * @param  string            $cacheGroupKey
+     * @param  array             $params
+     * @param  mixed             $data
+     * @param  string|array|null $tags
      * @return mixed
      */
-    function cache_put($cacheGroup, array $params = [], $data, $tags = ['default'])
+    function cache_put($cacheGroupKey, array $params = [], $data, $tags = null)
     {
-        return \NodesCache::put($cacheGroup, $params, $data, $tags);
+        return \NodesCache::put($cacheGroupKey, $params, $data, $tags);
     }
 }
 
 if (!function_exists('cache_forget')) {
 
     /**
-     * cache_forget
+     * Forget cache
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param       $cacheGroup
-     * @param array $params
-     * @param array $tags
+     *
+     * @param  string            $cacheGroupKey
+     * @param  array             $params
+     * @param  string|array|null $tags
      * @return boolean
      */
-    function cache_forget($cacheGroup, array $params = [], $tags = ['default'])
+    function cache_forget($cacheGroupKey, array $params = [], $tags = null)
     {
-        return \NodesCache::forget($cacheGroup, $params, $tags);
+        return \NodesCache::forget($cacheGroupKey, $params, $tags);
     }
 }
 
 if (!function_exists('cache_flush')) {
 
     /**
-     * cache_flush
+     * Flush cache tags
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param array $tags
+     *
+     * @param  string|array $tags
      * @return boolean
      */
-    function cache_flush($tags = ['default'])
+    function cache_flush($tags)
     {
         return \NodesCache::flush($tags);
     }
@@ -68,9 +72,10 @@ if (!function_exists('cache_flush')) {
 if (!function_exists('cache_wipe')) {
 
     /**
-     * cache_wipe
+     * Wipe entire cache
      *
      * @author Casper Rasmussen <cr@nodes.dk>
+     *
      * @return boolean
      */
     function cache_wipe()
@@ -82,9 +87,10 @@ if (!function_exists('cache_wipe')) {
 if (!function_exists('cache_get_groups')) {
 
     /**
-     * cache_get_group
+     * Retrieve all registered cache groups
      *
      * @author Casper Rasmussen <cr@nodes.dk>
+     *
      * @return array|null
      */
     function cache_get_groups()
@@ -96,10 +102,11 @@ if (!function_exists('cache_get_groups')) {
 if (!function_exists('cache_get_group')) {
 
     /**
-     * cache_get_group
+     * Retrieve a registered cache group
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param $cacheGroup
+     *
+     * @param string $cacheGroup
      * @return array|null
      */
     function cache_get_group($cacheGroup)
@@ -111,11 +118,12 @@ if (!function_exists('cache_get_group')) {
 if (!function_exists('cache_get_group_by_group_and_key')) {
 
     /**
-     * cache_get_group_by_group_and_key
+     * Retrieve registered cache group by group and key
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @param $group
-     * @param $key
+     *
+     * @param  string $group
+     * @param  string $key
      * @return array|null
      */
     function cache_get_group_by_group_and_key($group, $key)
