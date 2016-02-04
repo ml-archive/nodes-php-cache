@@ -44,7 +44,7 @@ class Repository
      * Retrieve cache
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access public
      * @param  string       $cacheGroupKey
      * @param  array        $params
@@ -80,7 +80,7 @@ class Repository
      * Write to cache
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access public
      * @param  string            $cacheGroupKey
      * @param  array             $params
@@ -122,7 +122,7 @@ class Repository
      * Delete cache
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access public
      * @param  string            $cacheGroupKey
      * @param  array             $params
@@ -158,7 +158,7 @@ class Repository
      * Flush cache by list of tags
      *
      * @author Casper Rasmussen <cr@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access public
      * @param  array|string $tags
      * @return boolean
@@ -172,7 +172,7 @@ class Repository
      * Flush entire cache
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access public
      * @return boolean
      */
@@ -185,7 +185,7 @@ class Repository
      * Retrieve cache group
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access public
      * @param  string $cacheGroup
      * @return array|null
@@ -199,7 +199,7 @@ class Repository
      * Retrieve available cache groups
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access public
      * @return array
      */
@@ -212,7 +212,7 @@ class Repository
      * Retrieve cache group by group and key
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access public
      * @param  string $group
      * @param  string $key
@@ -228,7 +228,7 @@ class Repository
      * Generate cache key
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access private
      * @param  string       $key
      * @param  string|array $params
@@ -253,7 +253,7 @@ class Repository
      * Setup cache groups
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   25-09-2015
+     *
      * @access private
      * @param  array $groups
      * @return void
@@ -289,7 +289,7 @@ class Repository
      * Check if caching is enabled
      *
      * @author Morten Rugaard <moru@nodes.dk>
-     * @date   16-10-2015
+     *
      * @access protected
      * @return boolean
      */
