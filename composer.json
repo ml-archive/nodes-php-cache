@@ -1,6 +1,6 @@
 {
     "name": "nodes/cache",
-    "description": "Package to enforce a structure of how caching is done and where the settings can be found",
+    "description": "Makes it easier to control and manage Laravel caching",
     "keywords": [
         "nodes",
         "cache",
