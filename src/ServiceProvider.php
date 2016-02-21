@@ -27,15 +27,6 @@ class ServiceProvider extends AbstractServiceProvider
     ];
 
     /**
-     * Artisan commands to register
-     *
-     * @var array
-     */
-    protected $commands = [
-        \Nodes\Cache\Console\Commands\FlushCache::class
-    ];
-
-    /**
      * Array of configs to copy
      *
      * @var array
