@@ -115,7 +115,13 @@ class Repository
             $tags = [$tags];
         }
 
-        return IlluminateCache::tags($tags)->put($cacheKey, $data, $cacheGroup['lifetime'] ?: $this->config['lifetime']);
+        try {
+            return IlluminateCache::tags($tags)->put($cacheKey, $data, $cacheGroup['lifetime'] ?: $this->config['lifetime']);
+        } 
+        // predis bug with WRONG OPERATOR
+        catch(ServerException $e) {
+            cache_wipe();
+        }
     }
 
     /**
