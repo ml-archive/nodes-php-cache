@@ -120,8 +120,23 @@ class Repository
         } 
         // predis bug with WRONG OPERATOR
         catch(ServerException $e) {
-            app('nodes.bugsnag')->notifyException($e, null, 'error');
             cache_wipe();
+
+            try {
+
+                $errors = [
+                    'exception' => $e->getMessage(),
+                    'type' => 'redis wrong type',
+                    'tags' => $tags,
+                    'cache_key' => $cacheKey,
+                ];
+
+                // Notify bugsnag
+                app('nodes.bugsnag')->notifyException(json_encode($errors), null, 'error');
+
+            } catch (Exception $e) {
+                // Fail silent
+            }
         }
     }
 
