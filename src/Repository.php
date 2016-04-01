@@ -132,7 +132,7 @@ class Repository
                 ];
 
                 // Notify bugsnag
-                app('nodes.bugsnag')->notifyException(json_encode($errors), null, 'error');
+                app('nodes.bugsnag')->notifyException($e, json_encode($errors), 'error');
 
             } catch (Exception $e) {
                 // Fail silent
