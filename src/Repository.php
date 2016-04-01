@@ -120,6 +120,7 @@ class Repository
         } 
         // predis bug with WRONG OPERATOR
         catch(ServerException $e) {
+            app('nodes.bugsnag')->notifyException($e, null, 'error');
             cache_wipe();
         }
     }
