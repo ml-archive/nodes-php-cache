@@ -11,11 +11,10 @@ A easy integration for handling caching in a structured way to [Laravel](http://
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/cache.svg?style=social&label=Watch)](https://github.com/nodes-php/cache/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/cache.svg?style=social&label=Fork)](https://github.com/nodes-php/cache/network)
 
-## Introduction
+## 📝 Introduction
 One thing we at [Nodes](http://nodesagency.com) have been missing in [Laravel](http://laravel.com/docs) is more structure of where the cache settings can be found, and some helpers to crete cache params
 
-## Installation
-
+## 📦 Installation
 To install this package you will need:
 
 * Laravel 5.1+
@@ -25,7 +24,7 @@ You must then modify your `composer.json` file and run `composer update` to incl
 
 ```
 "require": {
-    "nodes/cache": "^0.1"
+    "nodes/cache": "^1.0"
 }
 ```
 
@@ -35,6 +34,7 @@ Or you can run the composer require command from your terminal.
 composer require nodes/cache
 ```
 
+## 🔧 Setup
 Setup service provider in config/app.php
 
 ```
@@ -49,7 +49,7 @@ Nodes\Cache\ServiceProvider::class
 
 Copy the config files from vendor/nodes/cache/config/cache.php to config/nodes/cache.php
 
-## Usage
+## ⚙ Usage
 
 ###Global functions
 
@@ -99,15 +99,13 @@ function cache_flush
 function cache_wipe
 ```
 
-## Developers / Maintainers
+## 🏆 Credits
 
-This package is developed and maintained by the PHP team at [Nodes Agency](http://nodesagency.com)
+This package is developed and maintained by the PHP team at [Nodes](http://nodesagency.com)
 
 [![Follow Nodes PHP on Twitter](https://img.shields.io/twitter/follow/nodesphp.svg?style=social)](https://twitter.com/nodesphp) [![Tweet Nodes PHP](https://img.shields.io/twitter/url/http/nodesphp.svg?style=social)](https://twitter.com/nodesphp)
 
-### License
+## 📄 License
 
 This package is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
-
-
 
