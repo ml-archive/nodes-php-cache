@@ -18,7 +18,6 @@ One thing we at [Nodes](http://nodesagency.com) have been missing a lot in [Lara
 We've come up with a more flexible and structured way of managing caches and their lifetime. Also we've created a few helper methods to make it all a bit easier and awesome.
 
 ## 📦 Installation
-
 To install this package you will need:
 
 * Laravel 5.1+
@@ -52,7 +51,7 @@ Setup alias in `config/app.php`
 'NodesCache' => Nodes\Cache\Support\Facades\Cache::class
 ```
 
-Publish config files
+Publish config file
 
 ```
 php artisan vendor:publish --provider="Nodes\Cache\ServiceProvider"
@@ -62,8 +61,9 @@ If you want to overwrite any existing config files use the `--force` parameter
 
 ```
 php artisan vendor:publish --provider="Nodes\Cache\ServiceProvider" --force
+```
 
-## Usage
+## ⚙ Usage
 
 ### Global methods
 
@@ -111,13 +111,11 @@ function cache_wipe()
 
 ## 🏆 Credits
 
-This package is developed and maintained by the PHP team at [Nodes Agency](http://nodesagency.com)
+This package is developed and maintained by the PHP team at [Nodes](http://nodesagency.com)
 
 [![Follow Nodes PHP on Twitter](https://img.shields.io/twitter/follow/nodesphp.svg?style=social)](https://twitter.com/nodesphp) [![Tweet Nodes PHP](https://img.shields.io/twitter/url/http/nodesphp.svg?style=social)](https://twitter.com/nodesphp)
 
 ## 📄 License
 
 This package is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
-
-
 
