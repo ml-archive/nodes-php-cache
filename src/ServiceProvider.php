@@ -1,39 +1,27 @@
 <?php
 namespace Nodes\Cache;
 
-use Nodes\AbstractServiceProvider;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 /**
  * Class ServiceProvider
  *
  * @package Nodes\Cache
  */
-class ServiceProvider extends AbstractServiceProvider
+class ServiceProvider extends IlluminateServiceProvider
 {
     /**
-     * Package name
+     * Bootstrap the application service
      *
-     * @var string
-     */
-    protected $package = 'cache';
-
-    /**
-     * Facades to install
+     * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @var array
+     * @access public
+     * @return void
      */
-    protected $facades = [
-        'NodesCache' => \Nodes\Cache\Support\Facades\Cache::class
-    ];
-
-    /**
-     * Array of configs to copy
-     *
-     * @var array
-     */
-    protected $configs = [
-        'config/cache.php' => 'config/nodes/cache.php'
-    ];
+    public function boot()
+    {
+        $this->publishGroups();
+    }
 
     /**
      * Register service provider
@@ -46,7 +34,24 @@ class ServiceProvider extends AbstractServiceProvider
     public function register()
     {
         parent::register();
+        
         $this->registerCacheRepository();
+    }
+
+    /**
+     * Register publish groups
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access protected
+     * @return void
+     */
+    protected function publishGroups()
+    {
+        // Config files
+        $this->publishes([
+            __DIR__ . '/../config/cache.php' => config_path('nodes/cache.php'),
+        ], 'config');
     }
 
     /**

@@ -13,7 +13,7 @@ if (!function_exists('cache_get')) {
      */
     function cache_get($cacheGroupKey, array $params = [], $tags = null)
     {
-        return \NodesCache::get($cacheGroupKey, $params, $tags);
+        return app('nodes.cache')->get($cacheGroupKey, $params, $tags);
     }
 }
 if (!function_exists('cache_put')) {
@@ -31,7 +31,7 @@ if (!function_exists('cache_put')) {
      */
     function cache_put($cacheGroupKey, array $params = [], $data, $tags = null)
     {
-        return \NodesCache::put($cacheGroupKey, $params, $data, $tags);
+        return app('nodes.cache')->put($cacheGroupKey, $params, $data, $tags);
     }
 }
 
@@ -49,7 +49,7 @@ if (!function_exists('cache_forget')) {
      */
     function cache_forget($cacheGroupKey, array $params = [], $tags = null)
     {
-        return \NodesCache::forget($cacheGroupKey, $params, $tags);
+        return app('nodes.cache')->forget($cacheGroupKey, $params, $tags);
     }
 }
 
@@ -65,7 +65,7 @@ if (!function_exists('cache_flush')) {
      */
     function cache_flush($tags)
     {
-        return \NodesCache::flush($tags);
+        return app('nodes.cache')->flush($tags);
     }
 }
 
@@ -80,7 +80,7 @@ if (!function_exists('cache_wipe')) {
      */
     function cache_wipe()
     {
-        return \NodesCache::wipe();
+        return app('nodes.cache')->wipe();
     }
 }
 
@@ -95,7 +95,7 @@ if (!function_exists('cache_get_groups')) {
      */
     function cache_get_groups()
     {
-        return \NodesCache::getCacheGroups();
+        return app('nodes.cache')->getCacheGroups();
     }
 }
 
@@ -111,7 +111,7 @@ if (!function_exists('cache_get_group')) {
      */
     function cache_get_group($cacheGroup)
     {
-        return \NodesCache::getCacheGroup($cacheGroup);
+        return app('nodes.cache')->getCacheGroup($cacheGroup);
     }
 }
 
@@ -128,7 +128,7 @@ if (!function_exists('cache_get_group_by_group_and_key')) {
      */
     function cache_get_group_by_group_and_key($group, $key)
     {
-        return \NodesCache::getCacheGroupByGroupAndKey($group, $key);
+        return app('nodes.cache')->getCacheGroupByGroupAndKey($group, $key);
     }
 }
 

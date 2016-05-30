@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * Class Cache
- * @author  Casper Rasmussen <cr@nodes.dk>
- *
+ * 
  * @package Nodes\Cache\Support\Facades
  */
 class Cache extends Facade
@@ -19,5 +18,8 @@ class Cache extends Facade
      * @access protected
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'nodes.cache'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'nodes.cache';
+    }
 }
