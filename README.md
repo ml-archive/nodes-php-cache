@@ -25,7 +25,7 @@ To install this package you will need:
 
 You must then modify your `composer.json` file and run `composer update` to include the latest version of the package in your project.
 
-```
+```json
 "require": {
     "nodes/cache": "^1.0"
 }
@@ -33,7 +33,7 @@ You must then modify your `composer.json` file and run `composer update` to incl
 
 Or you can run the composer require command from your terminal.
 
-```
+```bash
 composer require nodes/cache:^1.0
 ```
 
@@ -41,25 +41,25 @@ composer require nodes/cache:^1.0
 
 Setup service provider in `config/app.php`
 
-```
+```php
 Nodes\Cache\ServiceProvider::class
 ```
 
 Setup alias in `config/app.php`
 
-```
+```php
 'NodesCache' => Nodes\Cache\Support\Facades\Cache::class
 ```
 
 Publish config file
 
-```
+```bash
 php artisan vendor:publish --provider="Nodes\Cache\ServiceProvider"
 ```
 
 If you want to overwrite any existing config files use the `--force` parameter
 
-```
+```bash
 php artisan vendor:publish --provider="Nodes\Cache\ServiceProvider" --force
 ```
 
