@@ -1,8 +1,9 @@
 <?php
-if (!function_exists('cache_get')) {
+
+if (! function_exists('cache_get')) {
 
     /**
-     * Retrieve cache
+     * Retrieve cache.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
@@ -16,10 +17,10 @@ if (!function_exists('cache_get')) {
         return app('nodes.cache')->get($cacheGroupKey, $params, $tags);
     }
 }
-if (!function_exists('cache_put')) {
+if (! function_exists('cache_put')) {
 
     /**
-     * Store cache
+     * Store cache.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
@@ -29,23 +30,23 @@ if (!function_exists('cache_put')) {
      * @param  string|array|null $tags
      * @return mixed
      */
-    function cache_put($cacheGroupKey, array $params = [], $data, $tags = null)
+    function cache_put($cacheGroupKey, array $params, $data, $tags = null)
     {
         return app('nodes.cache')->put($cacheGroupKey, $params, $data, $tags);
     }
 }
 
-if (!function_exists('cache_forget')) {
+if (! function_exists('cache_forget')) {
 
     /**
-     * Forget cache
+     * Forget cache.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
      * @param  string            $cacheGroupKey
      * @param  array             $params
      * @param  string|array|null $tags
-     * @return boolean
+     * @return bool
      */
     function cache_forget($cacheGroupKey, array $params = [], $tags = null)
     {
@@ -53,15 +54,15 @@ if (!function_exists('cache_forget')) {
     }
 }
 
-if (!function_exists('cache_flush')) {
+if (! function_exists('cache_flush')) {
 
     /**
-     * Flush cache tags
+     * Flush cache tags.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
      * @param  string|array $tags
-     * @return boolean
+     * @return bool
      */
     function cache_flush($tags)
     {
@@ -69,14 +70,14 @@ if (!function_exists('cache_flush')) {
     }
 }
 
-if (!function_exists('cache_wipe')) {
+if (! function_exists('cache_wipe')) {
 
     /**
-     * Wipe entire cache
+     * Wipe entire cache.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @return boolean
+     * @return bool
      */
     function cache_wipe()
     {
@@ -84,10 +85,10 @@ if (!function_exists('cache_wipe')) {
     }
 }
 
-if (!function_exists('cache_get_groups')) {
+if (! function_exists('cache_get_groups')) {
 
     /**
-     * Retrieve all registered cache groups
+     * Retrieve all registered cache groups.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
@@ -99,10 +100,10 @@ if (!function_exists('cache_get_groups')) {
     }
 }
 
-if (!function_exists('cache_get_group')) {
+if (! function_exists('cache_get_group')) {
 
     /**
-     * Retrieve a registered cache group
+     * Retrieve a registered cache group.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
@@ -115,10 +116,10 @@ if (!function_exists('cache_get_group')) {
     }
 }
 
-if (!function_exists('cache_get_group_by_group_and_key')) {
+if (! function_exists('cache_get_group_by_group_and_key')) {
 
     /**
-     * Retrieve registered cache group by group and key
+     * Retrieve registered cache group by group and key.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
@@ -131,4 +132,3 @@ if (!function_exists('cache_get_group_by_group_and_key')) {
         return app('nodes.cache')->getCacheGroupByGroupAndKey($group, $key);
     }
 }
-

@@ -1,33 +1,31 @@
 <?php
+
 namespace Nodes\Cache;
 
 use Illuminate\Support\Facades\Cache as IlluminateCache;
 
 /**
- * Class Repository
- *
- * @package Nodes\Cache
+ * Class Repository.
  */
 class Repository
 {
     /**
-     * Cache config
+     * Cache config.
      *
      * @var array
      */
     protected $config;
 
     /**
-     * Cache groups
+     * Cache groups.
      *
      * @var array
      */
     protected $cacheGroups = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @access public
      * @param  array $config
      */
     public function __construct(array $config)
@@ -41,11 +39,10 @@ class Repository
     }
 
     /**
-     * Retrieve cache
+     * Retrieve cache.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @param  string       $cacheGroupKey
      * @param  array        $params
      * @param  string|array|null $tags
@@ -54,20 +51,20 @@ class Repository
     public function get($cacheGroupKey, array $params = [], $tags = null)
     {
         // Make sure caching is enabled
-        if (!$this->isCachingEnabled()) {
-            return null;
+        if (! $this->isCachingEnabled()) {
+            return;
         }
 
         // Retrieve cache group settings
         $cacheGroup = $this->getCacheGroup($cacheGroupKey);
 
         // Set cache tag to group name
-        if (!$tags) {
+        if (! $tags) {
             $tags = $cacheGroupKey;
         }
 
         if (empty($cacheGroup) || (empty($cacheGroup['active']) || empty($cacheGroup['key']))) {
-            return null;
+            return;
         }
 
         // Generate cache key
@@ -77,53 +74,51 @@ class Repository
     }
 
     /**
-     * Write to cache
+     * Write to cache.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @param  string            $cacheGroupKey
      * @param  array             $params
      * @param  mixed             $data
      * @param  string|array|null $tags
-     * @return boolean
+     * @return bool
      */
-    public function put($cacheGroupKey, array $params = [], $data, $tags = ['default'])
+    public function put($cacheGroupKey, array $params, $data, $tags = ['default'])
     {
         // Make sure caching is enabled
-        if (!$this->isCachingEnabled()) {
-            return null;
+        if (! $this->isCachingEnabled()) {
+            return;
         }
 
         // Retrieve cache group settings
         $cacheGroup = $this->getCacheGroup($cacheGroupKey);
 
         // Set cache tag to group name
-        if (!$tags) {
+        if (! $tags) {
             $tags = $cacheGroupKey;
         }
 
         if (empty($cacheGroup) || (empty($cacheGroup['active']) || empty($cacheGroup['key']))) {
-            return null;
+            return;
         }
 
         // Generate cache key
         $cacheKey = $this->generateCacheKey($cacheGroup['key'], $params);
 
         // Make sure we have an array of tags
-        if (!is_array($tags)) {
+        if (! is_array($tags)) {
             $tags = [$tags];
         }
 
         try {
             return IlluminateCache::tags($tags)->put($cacheKey, $data, $cacheGroup['lifetime'] ?: $this->config['lifetime']);
-        } 
+        }
         // predis bug with WRONG OPERATOR
-        catch(ServerException $e) {
+        catch (ServerException $e) {
             cache_wipe();
 
             try {
-
                 $errors = [
                     'exception' => $e->getMessage(),
                     'type' => 'redis wrong type',
@@ -133,7 +128,6 @@ class Repository
 
                 // Notify bugsnag
                 app('nodes.bugsnag')->notifyException($e, json_encode($errors), 'error');
-
             } catch (Exception $e) {
                 // Fail silent
             }
@@ -141,33 +135,32 @@ class Repository
     }
 
     /**
-     * Delete cache
+     * Delete cache.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @param  string            $cacheGroupKey
      * @param  array             $params
      * @param  string|array|null $tags
-     * @return boolean
+     * @return bool
      */
     public function forget($cacheGroupKey, array $params = [], $tags = null)
     {
         // Make sure caching is enabled
-        if (!$this->isCachingEnabled()) {
-            return null;
+        if (! $this->isCachingEnabled()) {
+            return;
         }
 
         // Retrieve cache group settings
         $cacheGroup = $this->getCacheGroup($cacheGroupKey);
 
         // Set cache tag to group name
-        if (!$tags) {
+        if (! $tags) {
             $tags = $cacheGroupKey;
         }
 
         if (empty($cacheGroup) || (empty($cacheGroup['active']) || empty($cacheGroup['key']))) {
-            return null;
+            return;
         }
 
         // Generate cache key
@@ -177,13 +170,12 @@ class Repository
     }
 
     /**
-     * Flush cache by list of tags
+     * Flush cache by list of tags.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @param  array|string $tags
-     * @return boolean
+     * @return bool
      */
     public function flush($tags)
     {
@@ -191,12 +183,11 @@ class Repository
     }
 
     /**
-     * Flush entire cache
+     * Flush entire cache.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
-     * @return boolean
+     * @return bool
      */
     public function wipe()
     {
@@ -204,25 +195,23 @@ class Repository
     }
 
     /**
-     * Retrieve cache group
+     * Retrieve cache group.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @param  string $cacheGroup
      * @return array|null
      */
     public function getCacheGroup($cacheGroup)
     {
-        return !empty($this->cacheGroups[$cacheGroup]) ? $this->cacheGroups[$cacheGroup] : null;
+        return ! empty($this->cacheGroups[$cacheGroup]) ? $this->cacheGroups[$cacheGroup] : null;
     }
 
     /**
-     * Retrieve available cache groups
+     * Retrieve available cache groups.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @return array
      */
     public function getCacheGroups()
@@ -231,27 +220,26 @@ class Repository
     }
 
     /**
-     * Retrieve cache group by group and key
+     * Retrieve cache group by group and key.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @param  string $group
      * @param  string $key
      * @return array|null
      */
     public function getCacheGroupByGroupAndKey($group, $key)
     {
-        $cacheGroupName = $group . '.' . $key;
+        $cacheGroupName = $group.'.'.$key;
+
         return $this->getCacheGroup($cacheGroupName);
     }
 
     /**
-     * Generate cache key
+     * Generate cache key.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access private
      * @param  string       $key
      * @param  string|array $params
      * @return string
@@ -268,15 +256,14 @@ class Repository
             $params = http_build_query($params);
         }
 
-        return $key . '|' . $params;
+        return $key.'|'.$params;
     }
 
     /**
-     * Setup cache groups
+     * Setup cache groups.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access private
      * @param  array $groups
      * @return void
      */
@@ -286,13 +273,13 @@ class Repository
             // If $keys is not an array, something is wrong
             // with the structure in the config file
             // and we'll just skip it.
-            if (!is_array($keys)) {
+            if (! is_array($keys)) {
                 continue;
             }
 
             foreach ($keys as $key => $settings) {
                 // Generate group name
-                $groupName = $group . '.' . $key;
+                $groupName = $group.'.'.$key;
 
                 // Make sure tag name doesn't already exists.
                 // If it does, we'll keep the first one adde
@@ -308,15 +295,14 @@ class Repository
     }
 
     /**
-     * Check if caching is enabled
+     * Check if caching is enabled.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
-     * @return boolean
+     * @return bool
      */
     protected function isCachingEnabled()
     {
-        return (bool)$this->config['enabled'];
+        return (bool) $this->config['enabled'];
     }
 }
