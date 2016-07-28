@@ -1,21 +1,19 @@
 <?php
+
 namespace Nodes\Cache;
 
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 /**
- * Class ServiceProvider
- *
- * @package Nodes\Cache
+ * Class ServiceProvider.
  */
 class ServiceProvider extends IlluminateServiceProvider
 {
     /**
-     * Bootstrap the application service
+     * Bootstrap the application service.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @return void
      */
     public function boot()
@@ -26,11 +24,10 @@ class ServiceProvider extends IlluminateServiceProvider
     }
 
     /**
-     * Register service provider
+     * Register service provider.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access public
      * @return void
      */
     public function register()
@@ -39,32 +36,30 @@ class ServiceProvider extends IlluminateServiceProvider
     }
 
     /**
-     * Register publish groups
+     * Register publish groups.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function publishGroups()
     {
         // Config files
         $this->publishes([
-            __DIR__ . '/../config/cache.php' => config_path('nodes/cache.php'),
+            __DIR__.'/../config/cache.php' => config_path('nodes/cache.php'),
         ], 'config');
     }
 
     /**
-     * registerCacheRepository
+     * registerCacheRepository.
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function registerCacheRepository()
     {
-        $this->app->singleton('nodes.cache', function($app) {
+        $this->app->singleton('nodes.cache', function ($app) {
             return new Repository(config('nodes.cache'));
         });
     }
