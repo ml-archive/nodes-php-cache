@@ -10,6 +10,7 @@ An easy integration for handling caching - in a structured way - for [Laravel](h
 [![Star repository on GitHub](https://img.shields.io/github/stars/nodes-php/cache.svg?style=social&label=Star)](https://github.com/nodes-php/cache/stargazers)
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/cache.svg?style=social&label=Watch)](https://github.com/nodes-php/cache/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/cache.svg?style=social&label=Fork)](https://github.com/nodes-php/cache/network)
+[![StyleCI](https://styleci.io/repos/45786070/shield)](https://styleci.io/repos/45786070)
 
 ## 📝 Introduction
 
