@@ -123,22 +123,21 @@ function cache_wipe()
 First important thing is to create the config for you new cache group, config should be in /config/nodes/cache.php (else you forgot to vendor:publish)
 
 ```
-    'groups'   => [
-        /*
-        |--------------------------------------------------------------------------
-        | Project
-        |--------------------------------------------------------------------------
-        |
-        | Cache settings used by your project.
-        |
-        */
-        'geographic' => [
-            'continent.bySlug' => [
-                'active'   => true,
-                'key'      => 'geographic-continent-by-slug',
-                'lifetime' => 3600,
-            ],
-
+'groups'   => [
+/*
+|--------------------------------------------------------------------------
+| Project
+|--------------------------------------------------------------------------
+|
+| Cache settings used by your project.
+|
+*/
+'geographic' => [
+    'continent.bySlug' => [
+	'active'   => true,
+	'key'      => 'geographic-continent-by-slug',
+	'lifetime' => 3600,
+    ],
 ...
 ```
 
@@ -151,14 +150,14 @@ Remember is a way to both get and put to cache, 95% of cases this will be the ri
 ```
 return cache_remember('geographic.continent.bySlug', ['slug' => $slug], function () use ($slug) {
 
-				// Look up in db
-				$continent = $this->where('slug', $slug)->first();
+	// Look up in db
+	$continent = $this->where('slug', $slug)->first();
 
-				if (!$continent) {
-								throw new EntityNotFoundException(sprintf('Could not find continent with slug [%s]', $slug));
-				}
+	if (!$continent) {
+		throw new EntityNotFoundException(sprintf('Could not find continent with slug [%s]', $slug));
+	}
 
-				return $continent;
+	return $continent;
 });
 ```
 
@@ -171,7 +170,7 @@ Just put data in cache
 // Look up in db
 $continent = $this->where('slug', $slug)->first();
 if (!$continent) {
-     throw new EntityNotFoundException(sprintf('Could not find continent with slug [%s]', $slug));
+	throw new EntityNotFoundException(sprintf('Could not find continent with slug [%s]', $slug));
 }
 
 // Put in cache
@@ -187,7 +186,7 @@ Just get data from cache
 $continent cache_get('geographic.continent.bySlug', ['slug' => $slug])
 ```
 
-`$continent` is the continent passed in earlier or null
+`$continent` is the continent or null
 
 ## 🏆 Credits
 
