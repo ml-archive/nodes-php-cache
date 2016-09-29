@@ -110,6 +110,54 @@ function cache_wipe()
 \NodesCache::cache_wipe()
 ```
 
+## Examples
+
+First important thing is to create the config for you new cache group
+
+```
+    'groups'   => [
+        /*
+        |--------------------------------------------------------------------------
+        | Project
+        |--------------------------------------------------------------------------
+        |
+        | Cache settings used by your project.
+        |
+        */
+        'geographic' => [
+            'continent.bySlug' => [
+                'active'   => true,
+                'key'      => 'geographic-continent-by-slug',
+                'lifetime' => 3600,
+            ],
+
+...
+```
+
+Will give you a $cacheGroup `geographic.continent.bySlug`
+Remember to make the key unique to avoid conflicts
+
+### Remember
+Remember is a way to both get and put to cache, 95% of cases this will be the right choice
+
+```
+  return cache_remember('geographic.continent.bySlug', ['slug' => $slug], function () use ($slug) {
+
+                // Look up in db
+                $continent = $this->where('slug', $slug)->first();
+
+                if (!$continent) {
+                    throw new EntityNotFoundException(sprintf('Could not find continent with slug [%s]', $slug));
+                }
+
+                return $continent;
+            });
+```
+
+This way we start by looking in cache, if data if found it will be returned. Else the closure will run where we look up the data in db and return. Returning it in closure will then cache it and return it.
+
+
+
 ## 🏆 Credits
 
 This package is developed and maintained by the PHP team at [Nodes](http://nodesagency.com)
