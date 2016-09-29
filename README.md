@@ -2,6 +2,13 @@
 
 An easy integration for handling caching - in a structured way - for [Laravel](http://laravel.com/docs).
 
+Cache keys often build up and ends up being 3+ params attenpended in a string. Or caching on urls will make different order of query params have different version of same cache. 
+Query params are often handled as hashmaps or dictionaries, which does not have a locked order
+
+The worst part is, you end up with having cache settings shattered all over your project.
+
+This package will make your life much easier
+
 [![Total downloads](https://img.shields.io/packagist/dt/nodes/cache.svg)](https://packagist.org/packages/nodes/cache)
 [![Monthly downloads](https://img.shields.io/packagist/dm/nodes/cache.svg)](https://packagist.org/packages/nodes/cache)
 [![Latest release](https://img.shields.io/packagist/v/nodes/cache.svg)](https://packagist.org/packages/nodes/cache)
