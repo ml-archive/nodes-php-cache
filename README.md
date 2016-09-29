@@ -165,6 +165,26 @@ Remember is a way to both get and put to cache, 95% of cases this will be the ri
 This way we start by looking in cache, if data if found it will be returned. Else the closure will run where we look up the data in db and return. Returning it in closure will then cache it and return it.
 
 
+### Put
+Just put data in cache
+```
+// Look up in db
+$continent = $this->where('slug', $slug)->first();
+
+// Put in cache
+$success = cache_put('geographic.continent.bySlug', ['slug' => $slug], $continent)
+```
+
+`$success` is a bool
+
+### Get
+Just get data from cache
+```
+// Get from cache
+$continent cache_get('geographic.continent.bySlug', ['slug' => $slug])
+```
+
+`$continent` is the continent passed in earlier or null
 
 ## 🏆 Credits
 
