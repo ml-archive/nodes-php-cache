@@ -170,6 +170,9 @@ Just put data in cache
 ```
 // Look up in db
 $continent = $this->where('slug', $slug)->first();
+if (!$continent) {
+     throw new EntityNotFoundException(sprintf('Could not find continent with slug [%s]', $slug));
+}
 
 // Put in cache
 $success = cache_put('geographic.continent.bySlug', ['slug' => $slug], $continent)
