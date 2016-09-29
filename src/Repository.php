@@ -52,7 +52,7 @@ class Repository
      */
     public function remember($cacheGroup, array $params = [], $tags = null, \Closure $closure = null)
     {
-        $data = cache_get($cacheGroup, $params, $tags);
+        $data = $this->get($cacheGroup, $params, $tags);
 
         if ($data) {
             return $data;
@@ -62,7 +62,7 @@ class Repository
             $callbackData = call_user_func($closure);
 
             if ($callbackData) {
-                cache_put($cacheGroup, $params, $callbackData, $tags);
+                $this->put($cacheGroup, $params, $callbackData, $tags);
             }
 
             return $callbackData;
