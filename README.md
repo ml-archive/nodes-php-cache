@@ -69,6 +69,10 @@ php artisan vendor:publish --provider="Nodes\Cache\ServiceProvider" --force
 ### Global methods
 
 ```php
+function cache_remember($cacheGroupKey, array $params = [], $data, $tags = null, \Closure $closure = null)
+```
+
+```php
 function cache_put($cacheGroupKey, array $params = [], $data, $tags = null)
 ```
 
@@ -91,23 +95,27 @@ function cache_wipe()
 ### Facade methods
 
 ```php
-\NodesCache::cache_put($cacheGroupKey, array $params = [], $data, $tags = null)
+\NodesCache::remember($cacheGroupKey, array $params = [], $data, $tags = null, \Closure $closure = null)
 ```
 
 ```php
-\NodesCache::cache_get($cacheGroupKey, array $params = [], $tags = null)
+\NodesCache::put($cacheGroupKey, array $params = [], $data, $tags = null)
 ```
 
 ```php
-\NodesCache::cache_forget($cacheGroupKey, array $params = [], $tags = null)
+\NodesCache::get($cacheGroupKey, array $params = [], $tags = null)
 ```
 
 ```php
-\NodesCache::cache_flush($tags)
+\NodesCache::forget($cacheGroupKey, array $params = [], $tags = null)
 ```
 
 ```php
-\NodesCache::cache_wipe()
+\NodesCache::flush($tags)
+```
+
+```php
+\NodesCache::wipe()
 ```
 
 ## Examples
