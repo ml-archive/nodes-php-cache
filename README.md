@@ -120,7 +120,7 @@ function cache_wipe()
 
 ## Examples
 
-First important thing is to create the config for you new cache group
+First important thing is to create the config for you new cache group, config should be in /config/nodes/cache.php (else you forgot to vendor:publish)
 
 ```
     'groups'   => [
