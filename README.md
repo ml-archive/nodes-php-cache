@@ -155,7 +155,7 @@ Remember to make the key unique to avoid conflicts
 Remember is a way to both get and put to cache, 95% of cases this will be the right choice
 
 ```
-return cache_remember('geographic.continent.bySlug', ['slug' => $slug], function () use ($slug) {
+return cache_remember('geographic.continent.bySlug', ['slug' => $slug], $tags, function () use ($slug) {
 
 	// Look up in db
 	$continent = $this->where('slug', $slug)->first();
