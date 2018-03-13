@@ -63,13 +63,13 @@ return [
         */
         'api' => [
             'userToken' => [
-                'active' => true,
-                'key' => 'api.userToken',
+                'active'   => true,
+                'key'      => 'api.userToken',
                 'lifetime' => 10,
             ],
             'masterToken' => [
-                'active' => true,
-                'key' => 'api.masterToken',
+                'active'   => true,
+                'key'      => 'api.masterToken',
                 'lifetime' => 10,
             ],
         ],
