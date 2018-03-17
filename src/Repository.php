@@ -55,7 +55,8 @@ class Repository
     {
         $data = $this->get($cacheGroup, $params, $tags);
 
-        if ($data) {
+        // Exactly null should be only case we do not accept currently cached data
+        if (!is_null($data)) {
             return $data;
         }
 
