@@ -17,10 +17,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | If a cache group does not have a "lifetime" available, it will use this
-    | setting as a default lifetime. Default is 3600 seconds (1 hour).
+    | setting as a default lifetime. Default is 60 minutes (1 hour).
     |
     */
-    'lifetime' => 3600,
+    'lifetime' => 60,
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     |   'users' => [
     |        'active' => true,
     |        'key' => 'users.index',
-    |        'lifetime' => 3600 // 1 hour
+    |        'lifetime' => 60 // 1 hour
     |    ]
     |
     */
@@ -63,13 +63,13 @@ return [
         */
         'api' => [
             'userToken' => [
-                'active' => true,
-                'key' => 'api.userToken',
+                'active'   => true,
+                'key'      => 'api.userToken',
                 'lifetime' => 10,
             ],
             'masterToken' => [
-                'active' => true,
-                'key' => 'api.masterToken',
+                'active'   => true,
+                'key'      => 'api.masterToken',
                 'lifetime' => 10,
             ],
         ],
