@@ -32,7 +32,7 @@ class Repository
     public function __construct(array $config)
     {
         // Setup cache groups
-        $cacheGroups = array_pull($config, 'groups');
+        $cacheGroups = Arr::pull();
         $this->setupCacheGroups($cacheGroups);
 
         // Set cache config
