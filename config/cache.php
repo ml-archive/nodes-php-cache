@@ -52,26 +52,5 @@ return [
         |
         */
         'project' => [],
-
-        /*
-        |--------------------------------------------------------------------------
-        | Api
-        |--------------------------------------------------------------------------
-        |
-        | Cache settings used by api plugin
-        |
-        */
-        'api' => [
-            'userToken' => [
-                'active'   => true,
-                'key'      => 'api.userToken',
-                'lifetime' => 10,
-            ],
-            'masterToken' => [
-                'active'   => true,
-                'key'      => 'api.masterToken',
-                'lifetime' => 10,
-            ],
-        ],
     ],
 ];
