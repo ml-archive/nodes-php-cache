@@ -2,8 +2,12 @@
 
 namespace Nodes\Cache;
 
+use Closure;
+use Illuminate\Cache\TaggableStore;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache as IlluminateCache;
-use Predis\Response\ServerException;
+use Nodes\Cache\Exceptions\CacheException;
+use Throwable;
 
 /**
  * Class Repository.
@@ -32,7 +36,7 @@ class Repository
     public function __construct(array $config)
     {
         // Setup cache groups
-        $cacheGroups = Arr::pull();
+        $cacheGroups = Arr::pull($config, 'groups');
         $this->setupCacheGroups($cacheGroups);
 
         // Set cache config
@@ -47,11 +51,12 @@ class Repository
      * @param               $cacheGroup
      * @param array         $params
      * @param null          $tags
-     * @param \Closure|null $closure
+     * @param Closure|null $closure
+     * @throws CacheException
      *
      * @return mixed|null
      */
-    public function remember($cacheGroup, array $params = [], $tags = null, \Closure $closure = null)
+    public function remember($cacheGroup, array $params = [], $tags = null, Closure $closure = null)
     {
         $data = $this->get($cacheGroup, $params, $tags);
 
@@ -69,6 +74,8 @@ class Repository
 
             return $callbackData;
         }
+
+        throw new CacheException();
     }
 
     /**
@@ -86,7 +93,7 @@ class Repository
     {
         // Make sure caching is enabled
         if (!$this->isCachingEnabled()) {
-            return;
+            return null;
         }
 
         // Retrieve cache group settings
@@ -98,13 +105,18 @@ class Repository
         }
 
         if (empty($cacheGroup) || (empty($cacheGroup['active']) || empty($cacheGroup['key']))) {
-            return;
+            return null;
         }
 
         // Generate cache key
         $cacheKey = $this->generateCacheKey($cacheGroup['key'], $params);
 
-        return IlluminateCache::tags($tags)->get($cacheKey);
+        $cacheStore = IlluminateCache::getStore();
+        if ($cacheStore instanceof TaggableStore) {
+            return $cacheStore->tags($tags)->get($cacheKey);
+        }
+
+        return null;
     }
 
     /**
@@ -147,26 +159,18 @@ class Repository
         }
 
         try {
-            return IlluminateCache::tags($tags)
-                                  ->put($cacheKey, $data, $cacheGroup['lifetime'] ?: $this->config['lifetime']);
-        } // predis bug with WRONG OPERATOR
-        catch (ServerException $e) {
-            cache_wipe();
+            $cacheStore = IlluminateCache::getStore();
 
-            try {
-                $errors = [
-                    'exception' => $e->getMessage(),
-                    'type'      => 'redis wrong type',
-                    'tags'      => $tags,
-                    'cache_key' => $cacheKey,
-                ];
-
-                // Notify bugsnag
-                app('nodes.bugsnag')->notifyException($e, json_encode($errors), 'error');
-            } catch (\Exception $e) {
-                // Fail silent
+            if ($cacheStore instanceof TaggableStore) {
+                return $cacheStore->tags($tags)->put($cacheKey, $data, $cacheGroup['lifetime'] ?: $this->config['lifetime']);
             }
+
+            throw new CacheException();
+        } catch (Throwable $e) {
+            cache_wipe();
         }
+
+        return false;
     }
 
     /**
@@ -180,7 +184,7 @@ class Repository
      *
      * @return bool
      */
-    public function forget($cacheGroupKey, array $params = [], $tags = null)
+    public function forget($cacheGroupKey, array $params = [], $tags = null) : bool
     {
         // Make sure caching is enabled
         if (!$this->isCachingEnabled()) {
@@ -202,7 +206,13 @@ class Repository
         // Generate cache key
         $cacheKey = $this->generateCacheKey($cacheGroup['key'], $params);
 
-        return IlluminateCache::tags($tags)->forget($cacheKey);
+        $cacheStore = IlluminateCache::getStore();
+
+        if ($cacheStore instanceof TaggableStore) {
+            return $cacheStore->tags($tags)->forget($cacheKey);
+        }
+
+        return false;
     }
 
     /**
@@ -214,9 +224,15 @@ class Repository
      *
      * @return bool
      */
-    public function flush($tags)
+    public function flush($tags) : bool
     {
-        return IlluminateCache::tags($tags)->flush();
+        $cacheStore = IlluminateCache::getStore();
+
+        if ($cacheStore instanceof TaggableStore) {
+            return $cacheStore->tags($tags)->flush();
+        }
+
+        return false;
     }
 
     /**
@@ -226,9 +242,9 @@ class Repository
      *
      * @return bool
      */
-    public function wipe()
+    public function wipe() : bool
     {
-        return IlluminateCache::flush();
+        return IlluminateCache::getStore()->flush();
     }
 
     /**
