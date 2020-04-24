@@ -48,10 +48,11 @@ class Repository
      *
      * @author Casper Rasmussen <cr@nodes.dk>
      *
-     * @param               $cacheGroup
-     * @param array         $params
-     * @param null          $tags
+     * @param              $cacheGroup
+     * @param array        $params
+     * @param null         $tags
      * @param Closure|null $closure
+     * 
      * @throws CacheException
      *
      * @return mixed|null
@@ -184,7 +185,7 @@ class Repository
      *
      * @return bool
      */
-    public function forget($cacheGroupKey, array $params = [], $tags = null) : bool
+    public function forget($cacheGroupKey, array $params = [], $tags = null): bool
     {
         // Make sure caching is enabled
         if (!$this->isCachingEnabled()) {
@@ -224,7 +225,7 @@ class Repository
      *
      * @return bool
      */
-    public function flush($tags) : bool
+    public function flush($tags): bool
     {
         $cacheStore = IlluminateCache::getStore();
 
@@ -242,7 +243,7 @@ class Repository
      *
      * @return bool
      */
-    public function wipe() : bool
+    public function wipe(): bool
     {
         return IlluminateCache::getStore()->flush();
     }
